@@ -5,7 +5,7 @@ package «ELFSage» where
   -- add package configuration options here
 
 require Cli from git
-  "https://github.com/leanprover/lean4-cli.git"@"main"
+  "https://github.com/leanprover/lean4-cli.git"@"v4.35.0"
 
 lean_lib «ELFSage» where
   -- add library configuration options here

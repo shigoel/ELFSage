@@ -1,5 +1,5 @@
 /- Lean doesn't seem to have fixed-width signed Ints in the stdlib. -/
-structure SInt32 := bytes : UInt32
+structure SInt32 where bytes : UInt32
 
 def SInt32.toInt (si :SInt32) : Int := 
   let uval := si.bytes.toNat
@@ -9,7 +9,7 @@ def SInt32.toInt (si :SInt32) : Int :=
 instance : Repr SInt32 where
   reprPrec sint := reprPrec $ sint.toInt
 
-structure SInt64 := bytes : UInt64
+structure SInt64 where bytes : UInt64
 
 def SInt64.toInt (si :SInt64) : Int := 
   let uval := si.bytes.toNat

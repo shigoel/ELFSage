@@ -45,8 +45,8 @@ def mkELF64SymbolTableEntry
   (h : bs.size - offset ≥ 0x18) :
   ELF64SymbolTableEntry := {
     st_name  := getUInt32from (offset + 0x00) (by omega),
-    st_info  := bs.get ⟨offset + 0x4, by omega⟩,
-    st_other := bs.get ⟨offset + 0x5, by omega⟩,
+    st_info  := bs.get (offset + 0x4) (by omega),
+    st_other := bs.get (offset + 0x5) (by omega),
     st_shndx := getUInt16from (offset + 0x6) (by omega),
     st_value := getUInt64from (offset + 0x8) (by omega),
     st_size  := getUInt64from (offset + 0x10) (by omega),
@@ -87,14 +87,14 @@ def mkELF32SymbolTableEntry
     st_name  := getUInt32from (offset + 0x00) (by omega),
     st_value := getUInt32from (offset + 0x04) (by omega),
     st_size  := getUInt32from (offset + 0x08) (by omega),
-    st_info  := bs.get ⟨offset + 0x9, by omega⟩,
-    st_other := bs.get ⟨offset + 0xa, by omega⟩,
+    st_info  := bs.get (offset + 0x9) (by omega),
+    st_other := bs.get (offset + 0xa) (by omega),
     st_shndx := getUInt16from (offset + 0xb) (by omega) ,
   } where
     getUInt16from := if isBigEndian then bs.getUInt16BEfrom else bs.getUInt16LEfrom
     getUInt32from := if isBigEndian then bs.getUInt32BEfrom else bs.getUInt32LEfrom
 
-inductive RawSymbolTableEntry :=
+inductive RawSymbolTableEntry where
   | elf32 : ELF32SymbolTableEntry → RawSymbolTableEntry
   | elf64 : ELF64SymbolTableEntry → RawSymbolTableEntry
   deriving Repr
